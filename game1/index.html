@@ -1,1 +1,772 @@
-<!DOCTYPE html><html><body><h1>游戏一号机</h1><p>请替换为你的游戏 HTML</p></body></html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小团快跑</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa 0%, #98f4fd 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            padding: 20px;
+        }
+        
+        #game-container {
+            position: relative;
+            width: 800px;
+            max-width: 95%;
+            text-align: center;
+        }
+        
+        #game-title {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+            text-shadow: 3px 3px 0 #ddd;
+            color: #1c94c8;
+        }
+        
+        #game-canvas {
+            border: 3px solid #330380;
+            background-color: #fff;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border-radius: 5px;
+            width: 100%;
+        }
+        
+        #stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding: 0 10px;
+            gap: 15px;
+        }
+        
+        .stat-box {
+            background: #fff;
+            border: 2px solid #000;
+            padding: 10px 20px;
+            font-weight: bold;
+            font-size: 20px;
+            box-shadow: 4px 4px 0 #000;
+            border-radius: 8px;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .stat-label {
+            margin-right: 8px;
+            color: #555;
+        }
+        
+        .stat-value {
+            color: #000;
+        }
+        
+        #game-over {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.95);
+            border: 3px solid #000;
+            padding: 40px;
+            text-align: center;
+            display: none;
+            box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
+            z-index: 10;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+        }
+        
+        #final-score {
+            font-size: 28px;
+            margin: 20px 0;
+            font-weight: bold;
+            color: #222;
+        }
+        
+        #high-score {
+            font-size: 24px;
+            margin-bottom: 25px;
+            color: #d35400;
+            font-weight: bold;
+        }
+        
+        #restart-btn {
+            background: #000;
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            font-size: 20px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.2s;
+            border-radius: 5px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        #restart-btn:hover {
+            background: #333;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        #instructions {
+            margin-top: 25px;
+            font-size: 18px;
+            padding: 20px;
+            background: #fff;
+            border: 2px solid #000;
+            box-shadow: 4px 4px 0 #000;
+            border-radius: 8px;
+            line-height: 1.6;
+        }
+        
+        .key {
+            display: inline-block;
+            padding: 3px 12px;
+            background: #000;
+            color: white;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-weight: bold;
+        }
+        
+        .game-message {
+            margin-top: 15px;
+            font-style: italic;
+            color: #555;
+        }
+        
+        @media (max-width: 600px) {
+            #game-title {
+                font-size: 36px;
+            }
+            
+            .stat-box {
+                font-size: 16px;
+                padding: 8px 12px;
+            }
+            
+            #instructions {
+                font-size: 16px;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <h1 id="game-title">小团快跑_v4.2</h1>
+        <div id="stats">
+            <div class="stat-box">
+                <span class="stat-label">得分:</span>
+                <span class="stat-value" id="score">0</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">生命:</span>
+                <span class="stat-value" id="lives">❤❤❤</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">最高分:</span>
+                <span class="stat-value" id="high-score-display">0</span>
+            </div>
+        </div>
+        <canvas id="game-canvas" width="800" height="400"></canvas>
+        
+        <div id="game-over">
+            <h2>游戏结束</h2>
+            <div id="final-score">最终得分: 0</div>
+            <div id="high-score">最高分: 0</div>
+            <button id="restart-btn">重新开始</button>
+        </div>
+        
+        <div id="instructions">
+            <p>按 <span class="key">空格键</span> 或 <span class="key">↑</span> 键跳跃</p>
+            <p>在空中可以再次跳跃一次！</p>
+            <p>躲避障碍物，坚持越久得分越高！</p>
+            <p class="game-message">小团快跑，跳跃吧！</p>
+        </div>
+    </div>
+
+    <script>
+        // 获取Canvas元素和上下文
+        const canvas = document.getElementById('game-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // 调整画布大小以适应容器
+        function resizeCanvas() {
+            const container = document.getElementById('game-container');
+            canvas.width = container.clientWidth;
+            canvas.height = Math.min(400, window.innerHeight * 0.6);
+            
+            // 更新地面位置（下移30%）
+            if (game) {
+                game.groundY = canvas.height * 0.85; // 原为0.75，下移30%
+                
+                // 重置玩家位置
+                if (player) {
+                    player.y = game.groundY - player.radius;
+                    player.isJumping = false;
+                    player.jumpVelocity = 0;
+                }
+            }
+        }
+        
+        // 游戏状态
+        const game = {
+            running: false,
+            score: 0,
+            lives: 3,
+            gameSpeed: 5,
+            groundY: canvas.height * 0.85, // 下移30%后的地平线位置
+            lastFrameTime: 0,
+            obstacleInterval: 2200, // 初始间隔延长
+            lastObstacleTime: 0,
+            lastScoreUpdate: 0,
+            scoreIncrement: 1,
+            baseSpeed: 5.75,
+            maxSpeed: 27.6,
+            highScore: 0,
+            isPaused: false,
+            ignoreInputUntil: 0,
+            gameOverTime: 0,
+            doubleJumpCooldown: 500,
+            lastDoubleJumpTime: 0
+        };
+        
+        // 从本地存储加载最高分
+        function loadHighScore() {
+            const savedScore = localStorage.getItem('highScore');
+            game.highScore = savedScore ? parseInt(savedScore) : 0;
+            document.getElementById('high-score-display').textContent = game.highScore;
+        }
+        
+        // 保存最高分到本地存储
+        function saveHighScore() {
+            if (game.score > game.highScore) {
+                game.highScore = game.score;
+                localStorage.setItem('highScore', game.highScore.toString());
+                document.getElementById('high-score-display').textContent = game.highScore;
+            }
+        }
+        
+        // 玩家对象
+        const player = {
+            x: 80,
+            y: 0,
+            radius: 15,
+            jumpHeight: 120, // 跳跃高度降低10%
+            isJumping: false,
+            jumpVelocity: 0,
+            gravity: 1.21,
+            jumpForce: -18.126,
+            maxJumpVelocity: 20,
+            canDoubleJump: false,
+            hasDoubleJump: false,
+            preJumpBuffer: false,
+            preJumpBufferTime: 0,
+            preJumpBufferWindow: 100,
+            doubleJumpAvailable: true,
+            lastLandTime: 0
+        };
+        
+        // 障碍物类型
+        const obstacleTypes = [
+            { type: 'low', height: 30, width: 40 },
+            { type: 'high', height: 50, width: 30 },
+            { type: 'water', height: 10, width: 80 } // 水潭障碍物
+        ];
+        
+        // 障碍物数组
+        let obstacles = [];
+        
+        // 初始化游戏
+        function initGame() {
+            resizeCanvas();
+            
+            game.running = true;
+            game.score = 0;
+            game.lives = 3;
+            game.gameSpeed = game.baseSpeed;
+            game.lastObstacleTime = 0;
+            game.obstacleInterval = 2200;
+            game.isPaused = false;
+            game.ignoreInputUntil = 0;
+            obstacles = [];
+            
+            player.y = game.groundY - player.radius;
+            player.isJumping = false;
+            player.jumpVelocity = 0;
+            player.canDoubleJump = false;
+            player.hasDoubleJump = false;
+            player.preJumpBuffer = false;
+            player.doubleJumpAvailable = true;
+            player.lastLandTime = 0;
+            
+            document.getElementById('score').textContent = game.score;
+            document.getElementById('lives').textContent = '❤❤❤';
+            document.getElementById('game-over').style.display = 'none';
+            
+            requestAnimationFrame(gameLoop);
+        }
+        
+        // 游戏主循环
+        function gameLoop(timestamp) {
+            if (!game.running || game.isPaused) return;
+            
+            // 计算时间增量
+            const deltaTime = timestamp - game.lastFrameTime;
+            game.lastFrameTime = timestamp;
+            
+            // 清除画布
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // 绘制地面
+            drawGround();
+            
+            // 更新和绘制玩家
+            updatePlayer(deltaTime, timestamp);
+            drawPlayer();
+            
+            // 生成障碍物
+            generateObstacles(timestamp);
+            
+            // 更新和绘制障碍物
+            updateObstacles(deltaTime);
+            drawObstacles();
+            
+            // 更新分数
+            updateScore(timestamp);
+            
+            // 检测碰撞
+            checkCollisions();
+            
+            // 更新游戏速度
+            updateGameSpeed();
+            
+            // 更新生命显示
+            document.getElementById('lives').textContent = '❤'.repeat(game.lives);
+            
+            // 游戏结束检查
+            if (game.lives <= 0) {
+                endGame(timestamp);
+                return;
+            }
+            
+            // 继续游戏循环
+            requestAnimationFrame(gameLoop);
+        }
+        
+        // 绘制地面
+        function drawGround() {
+            ctx.beginPath();
+            ctx.moveTo(0, game.groundY);
+            ctx.lineTo(canvas.width, game.groundY);
+            ctx.lineWidth = 3;
+            ctx.stroke();
+        }
+        
+        // 更新玩家状态
+        function updatePlayer(deltaTime, timestamp) {
+            if (player.isJumping) {
+                player.y += player.jumpVelocity * (deltaTime / 16);
+                player.jumpVelocity += player.gravity * (deltaTime / 16);
+                player.jumpVelocity = Math.min(player.jumpVelocity, player.maxJumpVelocity);
+                
+                const distanceToGround = (game.groundY - player.radius) - player.y;
+                const timeToLand = distanceToGround / player.jumpVelocity;
+                
+                if (player.jumpVelocity > 0 && timeToLand * 16 <= player.preJumpBufferWindow) {
+                    if (player.preJumpBuffer && timestamp - player.preJumpBufferTime <= player.preJumpBufferWindow) {
+                        jump(timestamp);
+                        player.preJumpBuffer = false;
+                    }
+                }
+                
+                if (player.y > game.groundY - player.radius) {
+                    player.y = game.groundY - player.radius;
+                    player.isJumping = false;
+                    player.jumpVelocity = 0;
+                    player.lastLandTime = timestamp;
+                    
+                    if (timestamp - game.lastDoubleJumpTime > game.doubleJumpCooldown) {
+                        player.doubleJumpAvailable = true;
+                    }
+                    
+                    if (player.preJumpBuffer && timestamp - player.preJumpBufferTime <= player.preJumpBufferWindow) {
+                        jump(timestamp);
+                        player.preJumpBuffer = false;
+                    }
+                }
+            }
+        }
+        
+        // 绘制玩家（移除二段跳箭头）
+        function drawPlayer() {
+            ctx.beginPath();
+            ctx.arc(player.x, player.y, player.radius, 0, Math.PI * 2);
+            
+            // 无敌状态闪烁效果
+            if (playerInvincible && Math.floor(Date.now() / 100) % 2 === 0) {
+                ctx.strokeStyle = '#f00';
+            } else {
+                ctx.strokeStyle = '#000';
+            }
+            
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            
+            // 添加小团的眼睛
+            ctx.beginPath();
+            ctx.arc(player.x + 5, player.y - 3, 3, 0, Math.PI * 2);
+            ctx.fillStyle = '#000';
+            ctx.fill();
+        }
+        
+        // 生成障碍物（水潭独立出现，与其他障碍物共享出现次数）
+        function generateObstacles(timestamp) {
+            // 调整障碍物密度
+            const densityFactor = 1 + Math.min(game.score / 100000, 1);
+            game.obstacleInterval = Math.max(1000 / densityFactor, 600);
+            
+            if (timestamp - game.lastObstacleTime > game.obstacleInterval) {
+                game.lastObstacleTime = timestamp;
+                
+                let obstacleCount = 1;
+                if (game.score > 5000) obstacleCount = Math.random() > 0.7 ? 2 : 1;
+                
+                // 决定是否生成水潭
+                const spawnWaterPool = Math.random() > 0.7;
+                let lastX = canvas.width;
+                const gap = 100 + Math.random() * 60;
+                
+                for (let i = 0; i < obstacleCount; i++) {
+                    if (spawnWaterPool && i === 0) {
+                        // 生成水潭
+                        obstacles.push({
+                            x: lastX,
+                            y: game.groundY,
+                            width: 120 + Math.random() * 80,
+                            height: 10,
+                            type: 'water',
+                            passed: false
+                        });
+                        lastX += obstacles[obstacles.length - 1].width + gap;
+                    } else {
+                        // 生成普通障碍物
+                        const type = Math.random() > 0.5 ? obstacleTypes[1] : obstacleTypes[0];
+                        obstacles.push({
+                            x: lastX,
+                            y: game.groundY,
+                            width: type.width,
+                            height: type.height,
+                            type: type.type,
+                            passed: false
+                        });
+                        lastX += type.width + gap;
+                    }
+                }
+            }
+        }
+        
+        // 更新障碍物位置
+        function updateObstacles(deltaTime) {
+            for (let i = obstacles.length - 1; i >= 0; i--) {
+                obstacles[i].x -= game.gameSpeed * (deltaTime / 16);
+                
+                if (obstacles[i].x + obstacles[i].width < 0) {
+                    obstacles.splice(i, 1);
+                }
+            }
+        }
+        
+        // 绘制障碍物（黑白风格，水潭用连续加粗加长斜线表示）
+        function drawObstacles() {
+            obstacles.forEach(obstacle => {
+                if (obstacle.type === 'water') {
+                    // 绘制水潭（加深、加长、加粗的斜线）
+                    ctx.strokeStyle = '#000';
+                    ctx.lineWidth = 2; // 加粗线条
+                    
+                    const lineCount = Math.ceil(obstacle.width / 8); // 增加线条密度
+                    for (let i = 0; i < lineCount; i++) {
+                        ctx.beginPath();
+                        ctx.moveTo(obstacle.x + i * 8, obstacle.y);
+                        ctx.lineTo(obstacle.x + i * 8 + 12, obstacle.y + 10); // 加长斜线
+                        ctx.stroke();
+                    }
+                } else {
+                    // 绘制普通障碍物
+                    ctx.beginPath();
+                    if (obstacle.type === 'low') {
+                        ctx.moveTo(obstacle.x, obstacle.y);
+                        ctx.lineTo(obstacle.x + obstacle.width, obstacle.y);
+                        ctx.lineTo(obstacle.x + obstacle.width / 2, obstacle.y - obstacle.height);
+                    } else {
+                        ctx.moveTo(obstacle.x, obstacle.y);
+                        ctx.lineTo(obstacle.x + obstacle.width, obstacle.y);
+                        ctx.lineTo(obstacle.x + obstacle.width / 2, obstacle.y - obstacle.height * 1.5);
+                    }
+                    ctx.closePath();
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                    
+                    // 障碍物纹理
+                    ctx.beginPath();
+                    ctx.moveTo(obstacle.x + obstacle.width/2, obstacle.y - obstacle.height/2);
+                    ctx.lineTo(obstacle.x + obstacle.width/2, obstacle.y);
+                    ctx.stroke();
+                }
+            });
+        }
+        
+        // 更新分数
+        function updateScore(timestamp) {
+            game.score += game.scoreIncrement;
+            
+            if (timestamp - game.lastScoreUpdate > 100) {
+                document.getElementById('score').textContent = game.score;
+                game.lastScoreUpdate = timestamp;
+            }
+        }
+        
+        // 更新游戏速度
+        function updateGameSpeed() {
+            const earlySpeedFactor = Math.min(game.score / 10000, 1);
+            const lateSpeedFactor = Math.max(0, (game.score - 10000) / 50000);
+            
+            game.gameSpeed = Math.min(
+                game.baseSpeed + (earlySpeedFactor * 7) + (lateSpeedFactor * 5),
+                game.maxSpeed
+            );
+        }
+        
+        // 碰撞检测
+        let playerInvincible = false;
+        let invincibleDuration = 1000;
+        let invincibleStart = 0;
+
+        function checkCollisions() {
+            const playerLeft = player.x - player.radius;
+            const playerRight = player.x + player.radius;
+            const playerTop = player.y - player.radius;
+            const playerBottom = player.y + player.radius;
+
+            for (let i = obstacles.length - 1; i >= 0; i--) {
+                const obstacle = obstacles[i];
+
+                if (playerInvincible && Date.now() - invincibleStart < invincibleDuration) {
+                    continue;
+                }
+
+                const obstacleLeft = obstacle.x;
+                const obstacleRight = obstacle.x + obstacle.width;
+                const obstacleTop = obstacle.y - (obstacle.type === 'water' ? 0 : obstacle.height);
+                const obstacleBottom = obstacle.y;
+
+                // 水潭碰撞检测（仅在落地时检测，且缩小判定区域）
+                if (obstacle.type === 'water') {
+                    const reducedLeft = obstacleLeft + player.radius * 0.7; // 缩小左侧判定区
+                    const reducedRight = obstacleRight - player.radius * 0.7; // 缩小右侧判定区
+                    
+                    // 仅在落地时检测，且球体完全在水潭内
+                    if (playerBottom >= game.groundY - player.radius && 
+                        playerLeft > reducedLeft && 
+                        playerRight < reducedRight) {
+                        
+                        handleCollision(obstacle);
+                        obstacles.splice(i, 1);
+                        continue;
+                    }
+                }
+
+                // 普通障碍物碰撞检测
+                if (playerRight > obstacleLeft && 
+                    playerLeft < obstacleRight && 
+                    playerBottom > obstacleTop) {
+                    
+                    if (isPointInTriangle(player.x, player.y, 
+                                          obstacle.x, obstacle.y,
+                                          obstacle.x + obstacle.width, obstacle.y,
+                                          obstacle.x + obstacle.width / 2, obstacle.y - obstacle.height)) {
+                                          
+                        handleCollision(obstacle);
+                        obstacles.splice(i, 1);
+                    }
+                }
+            }
+        }
+
+        function handleCollision(obstacle) {
+            game.lives--;
+            collisionEffect();
+            
+            playerInvincible = true;
+            invincibleStart = Date.now();
+            setTimeout(() => {
+                playerInvincible = false;
+            }, invincibleDuration);
+        }
+        
+        // 碰撞效果
+        function collisionEffect() {
+            if (playerInvincible) {
+                ctx.strokeStyle = ctx.strokeStyle === 'red' ? '#000' : 'red';
+            }
+            drawPlayer();
+            
+            // 碰撞粒子效果（黑白风格）
+            ctx.fillStyle = '#000';
+            for (let i = 0; i < 15; i++) {
+                ctx.beginPath();
+                ctx.arc(
+                    player.x + Math.random() * 20 - 10, 
+                    player.y + Math.random() * 20 - 10, 
+                    2, 0, Math.PI * 2
+                );
+                ctx.fill();
+            }
+            
+            game.isPaused = true;
+            setTimeout(() => {
+                game.isPaused = false;
+                player.isJumping = false;
+                player.jumpVelocity = 0;
+                if (player.y > game.groundY - player.radius) {
+                    player.y = game.groundY - player.radius;
+                }
+                if (game.running) {
+                    requestAnimationFrame(gameLoop);
+                }
+            }, 300);
+        }
+        
+        // 点是否在三角形内
+        function isPointInTriangle(px, py, ax, ay, bx, by, cx, cy) {
+            const areaOrig = Math.abs((bx - ax) * (cy - ay) - (cx - ax) * (by - ay));
+            
+            const area1 = Math.abs((ax - px) * (by - py) - (bx - px) * (ay - py));
+            const area2 = Math.abs((bx - px) * (cy - py) - (cx - px) * (by - py));
+            const area3 = Math.abs((cx - px) * (ay - py) - (ax - px) * (cy - py));
+            
+            return Math.abs(area1 + area2 + area3 - areaOrig) < 0.1;
+        }
+        
+        // 游戏结束
+        function endGame(timestamp) {
+            game.running = false;
+            game.gameOverTime = timestamp;
+            saveHighScore();
+            
+            document.getElementById('final-score').textContent = `最终得分: ${game.score}`;
+            document.getElementById('high-score').textContent = `最高分: ${game.highScore}`;
+            document.getElementById('game-over').style.display = 'block';
+        }
+        
+        // 玩家跳跃
+        function jump(timestamp) {
+            if (game.gameOverTime && timestamp - game.gameOverTime < 700) {
+                return;
+            }
+            
+            if (!game.running || game.isPaused) return;
+            
+            if (!player.isJumping) {
+                player.isJumping = true;
+                player.jumpVelocity = player.jumpForce;
+                player.hasDoubleJump = true;
+                return;
+            }
+            
+            if (player.isJumping && player.doubleJumpAvailable) {
+                player.jumpVelocity = player.jumpForce;
+                player.doubleJumpAvailable = false;
+                game.lastDoubleJumpTime = timestamp;
+            }
+        }
+        
+        // 事件监听
+        document.addEventListener('keydown', (e) => {
+            const timestamp = performance.now();
+            
+            if (e.code === 'Space' || e.key === ' ' || e.key === 'ArrowUp') {
+                if (!game.running) {
+                    initGame();
+                } else {
+                    if (player.isJumping && player.jumpVelocity > 0) {
+                        const distanceToGround = (game.groundY - player.radius) - player.y;
+                        const timeToLand = distanceToGround / player.jumpVelocity;
+                        
+                        if (timeToLand * 16 <= player.preJumpBufferWindow) {
+                            player.preJumpBuffer = true;
+                            player.preJumpBufferTime = timestamp;
+                        }
+                    }
+                    
+                    jump(timestamp);
+                }
+                e.preventDefault();
+            }
+        });
+        
+        canvas.addEventListener('click', () => {
+            const timestamp = performance.now();
+            if (!game.running) {
+                initGame();
+            } else {
+                jump(timestamp);
+            }
+        });
+        
+        document.getElementById('restart-btn').addEventListener('click', () => {
+            initGame();
+        });
+        
+        // 窗口大小变化时调整画布
+        window.addEventListener('resize', resizeCanvas);
+        
+        // 初始游戏说明
+        function drawStartScreen() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.font = '26px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillStyle = '#000';
+            ctx.fillText('按空格键_开始游戏吧owo', canvas.width / 2, canvas.height / 2 - 30);
+            
+            ctx.font = '20px Arial';
+            ctx.fillText('控制小团跳跃躲避障碍物！', canvas.width / 2, canvas.height / 2);
+            
+            ctx.font = '18px Arial';
+            ctx.fillText('小团运动速度提高了15%', canvas.width / 2, canvas.height / 2 + 30);
+            ctx.fillText('跳跃高度降低了10%，挑战更大！', canvas.width / 2, canvas.height / 2 + 60);
+            
+            ctx.font = '16px Arial';
+            ctx.fillText('二段跳有冷却时间，落地后才能再次使用', canvas.width / 2, canvas.height / 2 + 90);
+        }
+        
+        // 初始化
+        loadHighScore();
+        resizeCanvas();
+        drawStartScreen();
+    </script>
+</body>
+</html>
