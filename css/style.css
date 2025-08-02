@@ -1,0 +1,73 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #000;
+  color: #fff;
+  font-family: 'Courier New', monospace;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  text-align: center;
+}
+
+h1.glitch {
+  font-size: 4em;
+  position: relative;
+  color: #fff;
+  animation: flicker 1s infinite;
+}
+
+h1.glitch::before,
+h1.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  width: 100%;
+  color: #0ff;
+  z-index: -1;
+}
+
+h1.glitch::before {
+  top: -2px;
+  left: 2px;
+  color: #f0f;
+}
+
+h1.glitch::after {
+  top: 2px;
+  left: -2px;
+  color: #0ff;
+}
+
+.subtitle {
+  font-size: 1.2em;
+  margin-bottom: 30px;
+  color: #aaa;
+}
+
+.links a {
+  display: block;
+  font-size: 1.2em;
+  margin: 12px 0;
+  color: #0ff;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.links a:hover {
+  color: #f0f;
+  transform: scale(1.1);
+}
+
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    opacity: 1;
+  }
+  20%, 22%, 24%, 55% {
+    opacity: 0;
+  }
+}
