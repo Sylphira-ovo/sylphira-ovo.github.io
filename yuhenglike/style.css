@@ -1,0 +1,324 @@
+/* ===== 全局样式 ===== */
+body {
+    margin: 0;
+    padding: 0; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: white;
+    color: #333;
+    /* 添加固定背景图片 */
+    background-image: url("images/bg.jpg");
+    background-attachment: fixed; /* 固定背景，不随滚动移动 */
+    background-size: cover; /* 图片覆盖整个屏幕 */
+    background-position: right; /* 图片靠右显示 */
+    background-repeat: no-repeat; /* 不重复显示图片 */
+}
+
+/* ===== 链接样式 ===== */
+a { 
+    color: #000000;
+    text-decoration: none; 
+}
+a:hover { 
+    color: #ffffff;                 /*封面的要独立出来*/
+}
+
+/* ===== 页眉 ===== */
+header {
+    background: transparent; /* 透明背景 */
+    padding: 1rem;
+    text-align: center;
+    border-bottom: none; /* 移除底部边框 */
+    /* 可选：添加文字阴影使标题在背景上更清晰 */
+    color: #fff; /* 如果背景较暗，可将标题文字改为白色 */
+    margin-bottom: 0; 
+}
+
+footer {
+    background: #ffffff;
+    padding: 1rem;
+    text-align: center;
+}
+
+/* ===== 导航栏 ===== */
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+/* ===== 主内容区 ===== */
+main {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white; /* 主体保持白色背景 */
+    /* 可选：添加一点阴影区分主体和背景 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.section {
+    margin: 2rem 0;
+}
+
+/* ===== 网格布局（控制卡片默认分布） ===== */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+}
+
+/* ===== 默认卡片样式（恢复原始状态） ===== */
+.card {
+    background: #27363e;
+    color: #e0e0e0;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #3a4a54;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 角色和光锥页签的文字修改 */
+.card-text {
+    margin: 5px 0;      /* 原始上下边距 */
+    padding: 0;
+    text-align: center;
+    color: #F29E38;
+}
+
+
+/* ===== 特殊专属卡片容器 ===== */
+.special-card {
+    /* 固定比例容器 */
+    width: 15vw;
+    height: 18vw;
+    min-width: 160px;
+    min-height: 215px;
+    /* 特殊视觉样式 */
+    background: linear-gradient(135deg, #27363e 0%, #1a2a32 100%);
+    border: 1px solid #3a4a54;
+    box-shadow: 0 0 10px rgba(0, 150, 255, 0.3);
+    padding-bottom: 0 !important; /* 消除底部内边距 */
+}
+
+/* 大图容器 */
+.special-card-image-group {
+    margin-bottom: 0 !important;  /* 关键：消除图片与文字间距 */
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px;
+}
+
+/* 大图样式（保持比例+居中） */
+.special-card-large {
+    width: 70%;
+    max-height: 50%;
+    margin: 0 auto;
+    object-fit: contain;
+    border-radius: 4px;
+    border: 1px solid #4a5a64;
+    border: none !important; /* 强制移除边框 */
+    box-shadow: none !important; /* 移除阴影（如需保留可删除此行） */
+}
+
+/* 小图组容器 */
+.special-card-small-group {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    width: 70%;
+    margin: 0 auto 2px auto;
+}
+
+/* 小图样式（强制正方形） */
+.special-card-small {
+    width: calc(35% - 4px); /* (70%/2) - 间隙的一半 */
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid #4a5a64;
+    border: none !important; /* 强制移除边框 */
+    box-shadow: none !important; /* 移除阴影（如需保留可删除此行） */
+}
+
+/* 原神 星穹铁道 未来日期行 */
+.card-game-gen{
+    background: #ffffff;
+    color: #000000;
+    padding: 0.8rem;
+    border-radius: 5px;
+    border: 1px solid #3a4a54;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    width:25%;
+    margin: 0 1%; /* 增加一点间距 */
+    text-decoration: none; /* 移除链接下划线 */
+}
+.card-game-hsr{
+    background: #2a34bf;
+    color: #ffffff;
+    padding: 0.8rem;
+    border-radius: 5px;
+    border: 1px solid #3a4a54;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    width:25%;
+    margin: 0 1%; /* 增加一点间距 */
+    text-decoration: none; /* 移除链接下划线 */
+}
+.card-game-fut{
+    background: #ffffff;
+    color: #000000;
+    padding: 0.8rem;
+    border-radius: 5px;
+    border: 1.5px solid #7f00c8;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    width:25%;
+    margin: 0 1%; /* 增加一点间距 */
+    text-decoration: none; /* 移除链接下划线 */
+}
+.card-game-large{
+    background: #ffffff;
+    color: #e0e0e0;
+    padding: 0.5rem;
+    border-radius: 8px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    gap: 8px; /* 卡片之间的间距 */
+    flex-wrap: wrap; /* 确保小屏幕下自动换行 */
+}
+.word-box{
+    background: #ffffff;
+    color: #e0e0e0;
+    padding: 0rem;
+    border-radius: 8px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    gap: 8px; /* 卡片之间的间距 */
+    flex-wrap: wrap; /* 确保小屏幕下自动换行 */
+    margin-bottom: 0; /* 保持两行之间无间距 */
+    margin-top: 0.5rem; /* 第一行上方添加空间（可调整数值） */
+}
+.word-box-2{
+    background: #ffffff;
+    color: #e0e0e0;
+    padding: 0rem;
+    border-radius: 8px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    gap: 8px; /* 卡片之间的间距 */
+    flex-wrap: wrap; /* 确保小屏幕下自动换行 */
+    margin-top:0;
+    margin-bottom: 0.5rem; 
+}
+.word-box, .word-box-2 {
+  grid-column: 1 / -1; /* 从第1列到最后一列，即独占一行 */
+  margin-left: 0; /* 清除左右默认间距 */
+  margin-right: 0;
+}
+
+.card-tab{
+    background: #ffffff;
+    color: #000000;
+    padding: 0.5rem 0.6rem; /* 减少内边距，上下更紧凑 */
+    border-radius: 4px;
+    border: 2px solid #ff9812;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    width: auto; /* 宽度随文字变化 */
+    min-width: auto; /* 取消最小宽度限制 */
+    height: auto; /* 高度由内容决定 */
+    line-height: 1.2; /* 行高控制单行高度 */
+    margin: 0; /* 移除额外边距 */
+    text-decoration: none;
+    display: inline-flex; /* 确保元素宽度贴合内容 */
+    align-items: center; /* 文字垂直居中 */
+    white-space: nowrap; /* 防止文字换行 */
+}
+.card-tab-new{
+    background: #ffffff;
+    color: #000000;
+    padding: 0.5rem 0.6rem; /* 减少内边距，上下更紧凑 */
+    border-radius: 4px;
+    border: 2px solid #7f00c8;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    width: auto; /* 宽度随文字变化 */
+    min-width: auto;
+    height: auto;
+    line-height: 1.2;
+    margin: 0;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+
+.big-box {
+  
+    background-color: #ffffff;
+  /* 大幅减少大盒子自身的内边距 */
+    padding: 0; /* 原可能有默认值，这里改小，可根据需求调 0 或更小 */
+  /* 清除大盒子默认外边距（如果有的话） */
+    margin: 0 auto; /* 保持水平居中，按需调整 */
+    /* 清除大盒子自身的默认外边距 */
+    margin-top: 0; 
+    border-bottom: 1px solid #000000;
+    padding-bottom: 1.5rem;
+}
+
+/* 调整大盒子内部 .section 的边距：找到原 .section 样式，追加或修改 */
+.big-box .section {
+  /* 大幅减少内部 section 的上下外边距 */
+  margin: 0; /* 原可能是 2rem，改成很小的值 */
+  /* 大幅减少内部 section 的内边距（如果有） */
+  padding: 0; /* 按需调整，甚至可以设为 0 */
+}
+
+/* 调整卡片容器 .card-game-large 的边距（如果内部有这个类） */
+.big-box .card-game-large {
+  /* 减少自身内边距，原是 0.5rem 之类的，改小 */
+  padding: 0; 
+  /* 减少外边距（如果有） */
+  margin: 0; 
+}
+
+
+
+
+
+
+
+
+
+/* 文字样式（多语言支持） */
+.special-card .card-text::before {
+    content: attr(data-text-ch);
+}
+html[lang="en"] .special-card .card-text::before {
+    content: attr(data-text-en);
+}
+.special-card-image-group {
+    padding: 12px;
+    background-color: rgba(39, 54, 62, 0.7); /* 与背景色协调的半透明层 */
+    border-radius: 6px;
+    margin: 5px;
+}
