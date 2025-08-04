@@ -11,6 +11,8 @@ body {
     background-size: cover; /* 图片覆盖整个屏幕 */
     background-position: right; /* 图片靠右显示 */
     background-repeat: no-repeat; /* 不重复显示图片 */
+
+
 }
 
 /* ===== 链接样式 ===== */
@@ -31,6 +33,14 @@ header {
     /* 可选：添加文字阴影使标题在背景上更清晰 */
     color: #fff; /* 如果背景较暗，可将标题文字改为白色 */
     margin-bottom: 0; 
+
+    /* 关键：设置高度为视口高度的20% */
+    height: 188px;
+    /* 确保内容在页眉内垂直居中 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 footer {
@@ -52,12 +62,13 @@ nav ul {
 
 /* ===== 主内容区 ===== */
 main {
-    padding: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
+    padding: 1rem 0.5rem;
+    margin: 0rem auto;
     background: white; /* 主体保持白色背景 */
     /* 可选：添加一点阴影区分主体和背景 */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%; /* 扩展到全屏宽度 */
+    
 }
 
 .section {
@@ -69,6 +80,7 @@ main {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     gap: 1rem;
+    
 }
 
 /* ===== 默认卡片样式（恢复原始状态） ===== */
@@ -97,59 +109,19 @@ main {
 
 
 /* ===== 特殊专属卡片容器 ===== */
-.special-card {
-    /* 固定比例容器 */
-    width: 15vw;
-    height: 18vw;
-    min-width: 160px;
-    min-height: 215px;
-    /* 特殊视觉样式 */
-    background: linear-gradient(135deg, #27363e 0%, #1a2a32 100%);
-    border: 1px solid #3a4a54;
-    box-shadow: 0 0 10px rgba(0, 150, 255, 0.3);
-    padding-bottom: 0 !important; /* 消除底部内边距 */
-}
+
 
 /* 大图容器 */
-.special-card-image-group {
-    margin-bottom: 0 !important;  /* 关键：消除图片与文字间距 */
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 10px;
-}
+
 
 /* 大图样式（保持比例+居中） */
-.special-card-large {
-    width: 70%;
-    max-height: 50%;
-    margin: 0 auto;
-    object-fit: contain;
-    border-radius: 4px;
-    border: 1px solid #4a5a64;
-    border: none !important; /* 强制移除边框 */
-    box-shadow: none !important; /* 移除阴影（如需保留可删除此行） */
-}
+
 
 /* 小图组容器 */
-.special-card-small-group {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    width: 70%;
-    margin: 0 auto 2px auto;
-}
+
 
 /* 小图样式（强制正方形） */
-.special-card-small {
-    width: calc(35% - 4px); /* (70%/2) - 间隙的一半 */
-    aspect-ratio: 1/1;
-    object-fit: cover;
-    border-radius: 4px;
-    border: 1px solid #4a5a64;
-    border: none !important; /* 强制移除边框 */
-    box-shadow: none !important; /* 移除阴影（如需保留可删除此行） */
-}
+
 
 /* 原神 星穹铁道 未来日期行 */
 .card-game-gen{
@@ -316,9 +288,149 @@ main {
 html[lang="en"] .special-card .card-text::before {
     content: attr(data-text-en);
 }
+
+
+
+/* 特殊卡片容器样式 */
+.special-cards-container {
+    /* 防止容器影响整体布局 */
+    margin: 0.2rem 0;
+    overflow: hidden; /* 隐藏超出容器的内容 */
+}
+
+/* 特殊卡片网格 - 使用弹性布局实现单行滚动 */
+
+
+/* 保持特殊卡片尺寸固定 */
+
+
+/* 移除原有网格布局对特殊卡片的影响 */
+.section:nth-of-type(4) .grid {
+    justify-items: stretch;
+    justify-content: center;
+}
+
+/* 调整主标题样式 */
+header h1:first-of-type {
+    font-family: "Microsoft YaHei", "微软雅黑", sans-serif; /* 设置为微软雅黑 */
+    font-size: 3.1rem; /* 增大字体大小，可根据需要调整数值 */
+    margin: 0.5rem 0; /* 调整上下边距，避免过大间距 */
+    font-weight: normal;
+}
+
+/* 调整版本号标题样式 */
+header h1:last-of-type {
+    font-family: "Microsoft YaHei", "微软雅黑", sans-serif; /* 设置为微软雅黑 */
+    font-size: 1.8rem; /* 减小字体大小，可根据需要调整数值 */
+    font-weight: bold; /* 加粗显示 */
+    margin: 0.5rem 0; /* 调整上下边距 */
+}
+
+/* 隐藏滚动条但保留滚动功能 */
+html {
+  overflow: -moz-scrollbars-none;  /* Firefox旧版 */
+  scrollbar-width: none;           /* Firefox新版 */
+  -ms-overflow-style: none;        /* IE/Edge */
+}
+
+html::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/Opera */
+}
+
+
+
+
+/* === Updated special-card styles === */
+
+:root {
+    --gap: 0.5rem;
+}
+
+/* 特殊卡片容器网格 */
+.special-cards-grid {
+    display: flex;
+    gap: var(--gap);
+    padding: 0.5rem 0;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    white-space: nowrap;
+    justify-content: flex-start;
+    width: 100%;
+    box-sizing: border-box;
+    align-items: flex-start;
+}
+
+/* 特殊卡片 */
+.special-card {
+    flex: 0 0 calc((100% - 5 * var(--gap)) / 6);
+    padding: 0.6rem;
+    background: linear-gradient(135deg, #27363e 0%, #1a2a32 100%);
+    border: 1px solid #3a4a54;
+    box-shadow: 0 0 10px rgba(0, 150, 255, 0.3);
+    border-radius: 8px;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    box-sizing: border-box;
+
+    height: auto !important;
+    min-height: auto !important;
+}
+
+/* 图片容器 */
 .special-card-image-group {
-    padding: 12px;
-    background-color: rgba(39, 54, 62, 0.7); /* 与背景色协调的半透明层 */
-    border-radius: 6px;
-    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5em;
+    width: 100%;
+}
+
+/* 主图片 */
+.special-card-large {
+    width: 70%;
+    height: auto;
+    max-height: 8em;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: none;
+}
+
+/* 小图组 */
+.special-card-small-group {
+    display: flex;
+    justify-content: center;
+    gap: 0.4em;
+    width: 70%;
+    margin-top: 0.2em;
+}
+
+/* 小图样式 */
+.special-card-small {
+    width: 2.2em;
+    height: 2.2em;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+/* 文字 */
+.card-text {
+    margin-top: 0.5em;
+    text-align: center;
+    color: #F29E38;
+}
+
+/* 缩放时卡片数变化 */
+@media (min-width: 3000px) {
+    .special-card {
+        flex: 0 0 calc((100% - 3.25 * var(--gap)) / 4.25);
+    }
+}
+
+@media (min-width: 3500px) {
+    .special-card {
+        flex: 0 0 calc((100% - 2.65 * var(--gap)) / 3.65);
+    }
 }
