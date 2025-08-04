@@ -184,7 +184,7 @@ main {
     gap: 8px; /* 卡片之间的间距 */
     flex-wrap: wrap; /* 确保小屏幕下自动换行 */
     margin-bottom: 0; /* 保持两行之间无间距 */
-    margin-top: 0.5rem; /* 第一行上方添加空间（可调整数值） */
+    margin-top: 0.8rem; /* 第一行上方添加空间（可调整数值） */
 }
 .word-box-2{
     background: #ffffff;
@@ -198,7 +198,7 @@ main {
     gap: 8px; /* 卡片之间的间距 */
     flex-wrap: wrap; /* 确保小屏幕下自动换行 */
     margin-top:0;
-    margin-bottom: 0.5rem; 
+    margin-bottom: 0.8rem; 
     font-family: "Microsoft YaHei", "微软雅黑", sans-serif;
     font-weight: bold;
     font-size: 1.2rem;
@@ -212,7 +212,7 @@ main {
 .card-tab{
     background: #ffffff;
     color: #000000;
-    padding: 0.5rem 0.6rem; /* 减少内边距，上下更紧凑 */
+    padding: 0.5rem 1rem; /* 减少内边距，上下更紧凑 */
     border-radius: 4px;
     border: 2px solid #ff9812;
     text-align: center;
@@ -220,8 +220,9 @@ main {
     width: auto; /* 宽度随文字变化 */
     min-width: auto; /* 取消最小宽度限制 */
     height: auto; /* 高度由内容决定 */
-    line-height: 1.2; /* 行高控制单行高度 */
-    margin: 0; /* 移除额外边距 */
+    line-height: 1.5; /* 行高控制单行高度 */
+    margin-left: 0.3rem; /* 移除额外边距 */
+    margin-right: 0.3rem; /* 移除额外边距 */
     text-decoration: none;
     display: inline-flex; /* 确保元素宽度贴合内容 */
     align-items: center; /* 文字垂直居中 */
@@ -233,7 +234,7 @@ main {
 .card-tab-new{
     background: #ffffff;
     color: #000000;
-    padding: 0.5rem 0.6rem; /* 减少内边距，上下更紧凑 */
+    padding: 0.5rem 1rem; /* 减少内边距，上下更紧凑 */
     border-radius: 4px;
     border: 2px solid #7f00c8;
     text-align: center;
@@ -241,8 +242,9 @@ main {
     width: auto; /* 宽度随文字变化 */
     min-width: auto;
     height: auto;
-    line-height: 1.2;
-    margin: 0;
+    line-height: 1.5;
+    margin-left: 0.3rem; /* 移除额外边距 */
+    margin-right: 0.3rem; /* 移除额外边距 */
     text-decoration: none;
     display: inline-flex;
     align-items: center;
@@ -510,7 +512,7 @@ html::-webkit-scrollbar {
     gap: 0.5rem;s
 }
 .countdown-icon {
-    height: 2.8em;
+    height: 2.5em;
     vertical-align: middle;
 }
 .countdown-icon-2 {
