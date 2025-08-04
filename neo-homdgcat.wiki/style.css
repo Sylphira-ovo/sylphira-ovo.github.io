@@ -199,6 +199,9 @@ main {
     flex-wrap: wrap; /* 确保小屏幕下自动换行 */
     margin-top:0;
     margin-bottom: 0.5rem; 
+    font-family: "Microsoft YaHei", "微软雅黑", sans-serif;
+    font-weight: bold;
+    font-size: 1.2rem;
 }
 .word-box, .word-box-2 {
   grid-column: 1 / -1; /* 从第1列到最后一列，即独占一行 */
@@ -223,6 +226,9 @@ main {
     display: inline-flex; /* 确保元素宽度贴合内容 */
     align-items: center; /* 文字垂直居中 */
     white-space: nowrap; /* 防止文字换行 */
+    font-family: "Microsoft YaHei", "微软雅黑", sans-serif;
+    font-weight: bold;
+    font-size: 1rem;
 }
 .card-tab-new{
     background: #ffffff;
@@ -241,6 +247,9 @@ main {
     display: inline-flex;
     align-items: center;
     white-space: nowrap;
+    font-family: "Microsoft YaHei", "微软雅黑", sans-serif;
+    font-weight: bold;
+    font-size: 1rem;
 }
 
 
@@ -363,7 +372,7 @@ html::-webkit-scrollbar {
 /* 特殊卡片 */
 .special-card {
     flex: 0 0 calc((100% - 5 * var(--gap)) / 6);
-    padding: 0.6rem;
+    padding: 1rem;
     background: linear-gradient(135deg, #27363e 0%, #1a2a32 100%);
     border: 1px solid #3a4a54;
     box-shadow: 0 0 10px rgba(0, 150, 255, 0.3);
@@ -420,6 +429,17 @@ html::-webkit-scrollbar {
     margin-top: 0.5em;
     text-align: center;
     color: #F29E38;
+    font-family: "Microsoft YaHei", "微软雅黑", sans-serif;
+    font-weight: bold;
+    font-size: 1rem;
+}
+.card-text-four {           /*后续被覆盖了，这段没用*/
+    margin-top: 0.5em;
+    text-align: center;
+    color: #ff5ab8;
+    font-family: "Microsoft YaHei", "微软雅黑", sans-serif;
+    font-weight: bold;
+    font-size: 1rem;
 }
 
 /* 缩放时卡片数变化 */
@@ -433,4 +453,128 @@ html::-webkit-scrollbar {
     .special-card {
         flex: 0 0 calc((100% - 2.65 * var(--gap)) / 3.65);
     }
+}
+
+
+.bottom-button-group {
+    background-color: #a3a3a3; /* 浅灰底 */
+    padding: 0.8rem;
+    border-radius: 1px;
+    box-sizing: border-box;
+    margin-top: 0.2rem;   /* 原本是默认 section 的 2rem，现在压缩 */
+}
+
+.bottom-button-group .grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 0.5rem;
+}
+
+@media (min-width: 600px) {
+    .bottom-button-group .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1000px) {
+    .bottom-button-group .grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.bottom-button-group .card {
+    font-family: "Microsoft YaHei", "微软雅黑", sans-serif;
+    font-weight: bold;
+    font-size: 1.35rem;
+    background-color: #27363e;
+    color: #e0e0e0;
+    padding: 1.5rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+.bottom-button-group .card:hover {
+    transform: translateY(-2px);
+}
+
+.card-text[data-text-ch="永远的迷境饭"]::before {
+    color: rgb(248, 164, 219);
+}
+
+
+.countdown-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;s
+}
+.countdown-icon {
+    height: 2.8em;
+    vertical-align: middle;
+}
+.countdown-icon-2 {
+    height: 2em;
+    vertical-align: top;
+}
+.countdown-days {
+    color: rgb(224, 0, 0);
+    font-weight: bold;
+    font-family: "Microsoft YaHei", "微软雅黑", sans-serif;
+    font-size: 1rem;
+}
+
+/* 页眉第三行样式 */
+.header-third-line {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+/* 关于我按钮样式 */
+.about-me-btn {
+    border: 2px solid #ff9812; /* 橙色边框 */
+    color: #ffffff;
+    padding: 0.3rem 0.5rem;
+    border-radius: 4px;
+    font-family: "Microsoft YaHei", "微软雅黑", sans-serif;
+    font-size: 0.9rem;
+    font-weight: bold;
+    transition: all 0.2s;
+}
+
+.about-me-btn:hover {
+    background-color: rgba(255, 152, 18, 0.2); /* 橙色半透明背景 */
+    transform: translateY(-2px);
+}
+
+/* 页眉图片样式 */
+.header-img {
+    height: 2rem; /* 图片高度，可根据需要调整 */
+    width: auto;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* 页签按钮悬停效果 */
+.card-tab:hover, .card-tab-new:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+/* 取消原神按钮的文字悬停变色 */
+.card-game-gen:hover {
+    color: #000000; /* 保持原始黑色 */
+}
+.card-game-fut:hover {
+    color: #000000; /* 保持原始黑色 */
+}
+/* 取消怪物解析等页签的文字悬停变色 */
+.card-tab:hover, .card-tab-new:hover {
+    color: #000000; /* 保持原始黑色 */
+}
+/* 取消云璃倒计时区域的文字悬停变色效果 */
+.word-box a:hover,
+.word-box-2 a:hover {
+    color: #000000; /* 保持原始黑色 */
 }
