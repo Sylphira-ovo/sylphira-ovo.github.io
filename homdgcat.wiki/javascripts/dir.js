@@ -12,9 +12,9 @@ var GI = [
         },
         "Features": [],
         "Href": {
-            "CH": "/gi/monster",
-            "EN": "/gi/monster",
-            "RU": "/gi/monster"
+            "CH": "./gi/monster",
+            "EN": "./gi/monster",
+            "RU": "./gi/monster"
         }
     },
     {
@@ -30,9 +30,9 @@ var GI = [
         },
         "Features": [],
         "Href": {
-            "CH": "/gi/char",
-            "EN": "/gi/char",
-            "RU": "/gi/char"
+            "CH": "./gi/char",
+            "EN": "./gi/char",
+            "RU": "./gi/char"
         }
     },
     {
@@ -43,9 +43,9 @@ var GI = [
         },
         "Features": [],
         "Href": {
-            "CH": "/gi/banner",
-            "EN": "/gi/banner",
-            "RU": "/gi/banner"
+            "CH": "./gi/banner",
+            "EN": "./gi/banner",
+            "RU": "./gi/banner"
         }
     },
     {
@@ -60,9 +60,9 @@ var GI = [
         },
         "Features": [],
         "Href": {
-            "CH": "/gi/3boss",
-            "EN": "/gi/3boss",
-            "RU": "/gi/3boss"
+            "CH": "./gi/3boss",
+            "EN": "./gi/3boss",
+            "RU": "./gi/3boss"
         }
     },
     {
@@ -78,9 +78,9 @@ var GI = [
         },
         "Features": [],
         "Href": {
-            "CH": "/gi/abyss",
-            "EN": "/gi/abyss",
-            "RU": "/gi/abyss"
+            "CH": "./gi/abyss",
+            "EN": "./gi/abyss",
+            "RU": "./gi/abyss"
         }
     },
     {
@@ -214,8 +214,8 @@ var SR = [
         },
         "Features": [],
         "Href": {
-            "CH": "/sr/monster.html",
-            "EN": "/sr/monster.html"
+            "CH": "./sr/monster.html",
+            "EN": "./sr/monster.html"
         }
     },
     {
@@ -229,8 +229,8 @@ var SR = [
         },
         "Features": [],
         "Href": {
-            "CH": "/sr/char.html",
-            "EN": "/"
+            "CH": "./sr/char.html",
+            "EN": "./"
         }
     },
     {
@@ -240,8 +240,8 @@ var SR = [
         },
         "Features": [],
         "Href": {
-            "CH": "/yunli.html",
-            "EN": "/yunli.html"
+            "CH": "./yunli.html",
+            "EN": "./yunli.html"
         }
     },
     {
@@ -255,8 +255,8 @@ var SR = [
         },
         "Features": [],
         "Href": {
-            "CH": "/sr/chaos.html",
-            "EN": "/sr/chao.html"
+            "CH": "./sr/chaos.html",
+            "EN": "./sr/chao.html"
         }
     },
     {
@@ -266,8 +266,8 @@ var SR = [
         },
         "Features": [],
         "Href": {
-            "CH": "/sr/fiction.html",
-            "EN": "/sr/fiction.html"
+            "CH": "./sr/fiction.html",
+            "EN": "./sr/fiction.html"
         }
     },
     {
@@ -277,8 +277,8 @@ var SR = [
         },
         "Features": [],
         "Href": {
-            "CH": "/sr/shadow.html",
-            "EN": "/sr/shadow.html"
+            "CH": "./sr/shadow.html",
+            "EN": "./sr/shadow.html"
         }
     },
     {
@@ -288,8 +288,8 @@ var SR = [
         },
         "Features": [],
         "Href": {
-            "CH": "/sr/arbitration/",
-            "EN": "/sr/arbitration/"
+            "CH": "./sr/arbitration/",
+            "EN": "./sr/arbitration/"
         }
     },
     {
@@ -299,8 +299,8 @@ var SR = [
         },
         "Features": [],
         "Href": {
-            "CH": "/sr/banner.html",
-            "EN": "/sr/banner.html"
+            "CH": "./sr/banner.html",
+            "EN": "./sr/banner.html"
         }
     },
     {
@@ -310,8 +310,8 @@ var SR = [
         },
         "Features": [],
         "Href": {
-            "CH": "/sr/du31.html",
-            "EN": "/sr/du31.html"
+            "CH": "./sr/du31.html",
+            "EN": "./sr/du31.html"
         }
     },
     {
@@ -321,8 +321,8 @@ var SR = [
         },
         "Features": [],
         "Href": {
-            "CH": "/sr/du.html",
-            "EN": "/sr/du.html"
+            "CH": "./sr/du.html",
+            "EN": "./sr/du.html"
         }
     },
     {
@@ -332,8 +332,8 @@ var SR = [
         },
         "Features": [],
         "Href": {
-            "CH": "/sr/linecount.html",
-            "EN": "/sr/linecount.html"
+            "CH": "./sr/linecount.html",
+            "EN": "./sr/linecount.html"
         }
     },
     {
@@ -343,8 +343,8 @@ var SR = [
         },
         "Features": [],
         "Href": {
-            "CH": "/sr/item.html",
-            "EN": "/sr/item.html"
+            "CH": "./sr/item.html",
+            "EN": "./sr/item.html"
         }
     },
     {
@@ -354,8 +354,8 @@ var SR = [
         },
         "Features": [],
         "Href": {
-            "CH": "/sr/tut.html",
-            "EN": "/sr/tut.html",
+            "CH": "./sr/tut.html",
+            "EN": "./sr/tut.html",
         }
     },
     {
@@ -365,8 +365,8 @@ var SR = [
         },
         "Features": [],
         "Href": {
-            "CH": "/sr/ach.html",
-            "EN": "/sr/ach.html"
+            "CH": "./sr/ach.html",
+            "EN": "./sr/ach.html"
         }
     },
     {
@@ -376,8 +376,8 @@ var SR = [
         },
         "Features": [],
         "Href": {
-            "CH": "/sr/event.html",
-            "EN": "/sr/event.html"
+            "CH": "./sr/event.html",
+            "EN": "./sr/event.html"
         }
     },
     {
@@ -387,8 +387,8 @@ var SR = [
         },
         "Features": [],
         "Href": {
-            "CH": "/sr/stage.html",
-            "EN": "/sr/stage.html"
+            "CH": "./sr/stage.html",
+            "EN": "./sr/stage.html"
         }
     },
     {
@@ -398,8 +398,8 @@ var SR = [
         },
         "Features": [],
         "Href": {
-            "CH": "/sr/effect.html",
-            "EN": "/sr/effect.html"
+            "CH": "./sr/effect.html",
+            "EN": "./sr/effect.html"
         }
     },
 ]
